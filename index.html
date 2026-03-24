@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Twins Labs constrói produtos SaaS sob medida para acelerar crescimento, operação e receita.">
+  <title>Twins Labs | Construindo SaaS que escala</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080b1a;
+      --bg-soft: #11162a;
+      --card: #0f1426;
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text: #f5f7ff;
+      --text-soft: #bac3e2;
+      --primary: #6d5efc;
+      --primary-2: #ff7f66;
+      --success: #23d18b;
+      --container: 1200px;
+      --radius: 16px;
+      --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Manrope", sans-serif;
+      background:
+        radial-gradient(1200px 600px at 85% -10%, rgba(109, 94, 252, 0.4), transparent 60%),
+        radial-gradient(800px 400px at 10% 10%, rgba(255, 127, 102, 0.22), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: -20% -10%;
+      z-index: -2;
+      pointer-events: none;
+      background:
+        radial-gradient(520px 520px at 18% 22%, rgba(109, 94, 252, 0.18), transparent 62%),
+        radial-gradient(620px 620px at 82% 18%, rgba(255, 127, 102, 0.14), transparent 65%),
+        radial-gradient(500px 500px at 55% 82%, rgba(93, 131, 255, 0.16), transparent 63%);
+      animation: ambientShift 18s ease-in-out infinite alternate;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 2rem));
+      margin-inline: auto;
+    }
+
+    .section {
+      padding: 88px 0;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(8, 11, 26, 0.75);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .nav__inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+    }
+
+    .brand span {
+      color: var(--primary-2);
+    }
+
+    .menu {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .menu a {
+      text-decoration: none;
+      color: var(--text-soft);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn--primary {
+      color: white;
+      background: linear-gradient(100deg, var(--primary), #5d83ff);
+      box-shadow: 0 10px 24px rgba(109, 94, 252, 0.35);
+    }
+
+    .btn--ghost {
+      color: var(--text);
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero {
+      padding: 84px 0 44px;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .kicker {
+      color: #9aa8de;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.9rem);
+      line-height: 1.07;
+      margin-bottom: 1.2rem;
+    }
+
+    .grad {
+      background: linear-gradient(110deg, #8d83ff 0%, #ffd2c8 22%, #ff8d77 45%, #9f96ff 70%, #ffb8a8 100%);
+      background-size: 220% 100%;
+      animation: titleShimmer 4.2s ease-in-out infinite;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lead {
+      color: var(--text-soft);
+      max-width: 58ch;
+      margin-bottom: 2rem;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.2rem;
+    }
+
+    .trusted {
+      color: var(--text-soft);
+      font-size: 0.9rem;
+    }
+
+    .trusted__row {
+      margin-top: 0.8rem;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+
+    .trusted__item {
+      border: 1px solid var(--card-border);
+      border-radius: 999px;
+      padding: 0.45rem 0.7rem;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #d2d9f3;
+    }
+
+    .hero-card {
+      background: linear-gradient(160deg, rgba(109, 94, 252, 0.2), rgba(255, 127, 102, 0.16));
+      border: 1px solid var(--card-border);
+      border-radius: 24px;
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      animation: floatCard 4.8s ease-in-out infinite;
+    }
+
+    .hero-card__inner {
+      background: #0c1121;
+      border-radius: 14px;
+      border: 1px solid var(--card-border);
+      overflow: hidden;
+    }
+
+    .mock-top {
+      display: flex;
+      gap: 0.45rem;
+      align-items: center;
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2a334f;
+    }
+
+    .mock-body {
+      padding: 1rem;
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .line {
+      height: 10px;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #222c47, #1a223a);
+    }
+
+    .line:nth-child(2) { width: 75%; }
+    .line:nth-child(3) { width: 58%; }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      background: #0f1730;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      color: white;
+    }
+
+    .stat span {
+      font-size: 0.78rem;
+      color: #b2bfec;
+    }
+
+    .section-title {
+      margin-bottom: 0.7rem;
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+    }
+
+    .section-copy {
+      color: var(--text-soft);
+      max-width: 70ch;
+      margin-bottom: 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.3rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(159, 150, 255, 0.45);
+      box-shadow: 0 20px 38px rgba(0, 0, 0, 0.38);
+    }
+
+    .card h3 {
+      margin-bottom: 0.45rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      margin-bottom: 0.9rem;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      background: linear-gradient(135deg, rgba(109, 94, 252, 0.35), rgba(255, 127, 102, 0.3));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .solutions {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.03));
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .step {
+      border: 1px dashed rgba(255, 255, 255, 0.25);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      background: rgba(255, 255, 255, 0.02);
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .step:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .step small {
+      color: #9aa8de;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .step h4 {
+      margin: 0.35rem 0;
+      font-size: 1.06rem;
+    }
+
+    .step p {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .quote {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .quote:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 127, 102, 0.45);
+    }
+
+    .quote p {
+      color: #e8ecff;
+      margin-bottom: 1rem;
+    }
+
+    .quote footer {
+      color: #aeb7da;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .cta {
+      padding: 54px 0;
+    }
+
+    .cta-box {
+      border-radius: 20px;
+      background: linear-gradient(110deg, #6d5efc, #4a66ff 55%, #ff7f66);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-form {
+      width: min(520px, 100%);
+      background: rgba(8, 11, 26, 0.34);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 14px;
+      padding: 1rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .contact-form__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .contact-form label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #eef1ff;
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(8, 11, 26, 0.55);
+      color: #ffffff;
+      border-radius: 10px;
+      padding: 0.7rem 0.75rem;
+      font: inherit;
+      outline: none;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(220, 227, 255, 0.72);
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: rgba(255, 255, 255, 0.56);
+      box-shadow: 0 0 0 3px rgba(109, 94, 252, 0.32);
+    }
+
+    .contact-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .contact-form small {
+      color: rgba(238, 241, 255, 0.85);
+      font-size: 0.78rem;
+    }
+
+    .form-feedback {
+      min-height: 1.2rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #eef1ff;
+    }
+
+    .form-feedback--success {
+      color: #d5ffe9;
+    }
+
+    .form-feedback--error {
+      color: #ffd4d4;
+    }
+
+    .cta-box h3 {
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      max-width: 28ch;
+      line-height: 1.2;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 26px 0 34px;
+      color: #a9b4da;
+      font-size: 0.9rem;
+    }
+
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      will-change: transform, opacity;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes floatCard {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes ambientShift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0px);
+      }
+      50% {
+        transform: translate3d(8px, -10px, 0) scale(1.03);
+        filter: blur(0.2px);
+      }
+      100% {
+        transform: translate3d(-10px, 8px, 0) scale(1.04);
+        filter: blur(0.1px);
+      }
+    }
+
+    @keyframes titleShimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero__grid,
+      .grid-3,
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .testimonials {
+        grid-template-columns: 1fr;
+      }
+
+      .trusted__row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .menu {
+        display: none;
+        position: absolute;
+        top: 76px;
+        left: 1rem;
+        right: 1rem;
+        background: rgba(10, 14, 32, 0.97);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 0.6rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.2rem;
+      }
+
+      .menu.menu--open {
+        display: flex;
+      }
+
+      .menu a {
+        display: block;
+        padding: 0.75rem 0.8rem;
+        border-radius: 8px;
+      }
+
+      .menu a:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .mobile-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero__grid,
+      .grid-3,
+      .process,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 68px 0;
+      }
+
+      .hero {
+        padding-top: 52px;
+      }
+
+      .contact-form__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      body::before {
+        animation: none !important;
+      }
+
+      .hero-card,
+      .grad,
+      .reveal {
+        animation: none !important;
+        transform: none !important;
+      }
+
+      .reveal,
+      .card,
+      .step,
+      .quote,
+      .btn {
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__inner">
+      <a class="brand" href="#top">Twins<span>Labs</span></a>
+      <ul class="menu" id="main-menu">
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#solucoes">Soluções</a></li>
+        <li><a href="#processo">Processo</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+      </ul>
+      <button class="mobile-toggle" id="mobile-toggle" type="button" aria-expanded="false" aria-controls="main-menu" aria-label="Abrir menu">
+        ☰
+      </button>
+      <a class="btn btn--primary" href="#contato">Falar com especialista</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="kicker reveal">Estúdio de Engenharia SaaS</p>
+          <h1 class="reveal">Construímos produtos <span class="grad">SaaS</span> que crescem com o seu negócio</h1>
+          <p class="lead reveal">
+            A Twins Labs transforma ideias em plataformas SaaS robustas, com foco em produto, arquitetura e crescimento.
+            Do MVP ao scale-up, entregamos software que gera receita e reduz atrito operacional.
+          </p>
+          <div class="hero__actions reveal">
+            <a class="btn btn--primary" href="#contato">Agendar call</a>
+            <a class="btn btn--ghost" href="#produtos">Ver capacidades</a>
+          </div>
+
+          <div class="trusted reveal">
+            Times que confiam em produtos construídos por equipes com nossa abordagem:
+            <div class="trusted__row">
+              <span class="trusted__item">Fintech</span>
+              <span class="trusted__item">Healthtech</span>
+              <span class="trusted__item">Logtech</span>
+              <span class="trusted__item">Edtech</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card reveal">
+          <div class="hero-card__inner">
+            <div class="mock-top">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="mock-body">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="stats">
+                <div class="stat">
+                  <strong><span class="stat-value" data-target="42" data-prefix="+" data-suffix="%">0</span></strong>
+                  <span>Crescimento de MRR</span>
+                </div>
+                <div class="stat">
+                  <strong><span class="stat-value" data-target="31" data-prefix="-" data-suffix="%">0</span></strong>
+                  <span>Tempo operacional</span>
+                </div>
+                <div class="stat">
+                  <strong><span class="stat-value" data-target="99.9" data-suffix="%">0</span></strong>
+                  <span>Uptime da plataforma</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="produtos">
+      <div class="container">
+        <h2 class="section-title reveal">O que a Twins Labs constrói</h2>
+        <p class="section-copy reveal">
+          Estruturamos produtos SaaS ponta a ponta, combinando estratégia de negócio, design, desenvolvimento e operação.
+          Cada módulo foi pensado para escalar sem comprometer experiência, segurança ou velocidade de entrega.
+        </p>
+
+        <div class="grid-3">
+          <article class="card reveal">
+            <div class="icon">MVP</div>
+            <h3>MVPs orientados a validação</h3>
+            <p>Entregamos o primeiro produto com velocidade, medição de uso e base técnica pronta para evoluir.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">Core</div>
+            <h3>Plataformas SaaS multi-tenant</h3>
+            <p>Arquitetura escalável, billing, autenticação, permissão por papel e observabilidade desde o início.</p>
+          </article>
+          <article class="card reveal">
+            <div class="icon">AI</div>
+            <h3>Automações e IA aplicada</h3>
+            <p>Fluxos inteligentes para atendimento, vendas e operação, com foco em produtividade e margem.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section solutions" id="solucoes">
+      <div class="container">
+        <h2 class="section-title reveal">Soluções para cada fase do SaaS</h2>
+        <p class="section-copy reveal">
+          Atuamos como parceiro de produto e tecnologia para founders e times de crescimento.
+          Planejamos as prioridades com base em impacto de negócio e executamos com ciclos curtos.
+        </p>
+        <div class="grid-3">
+          <article class="card reveal">
+            <h3>Fundação técnica</h3>
+            <p>Configuração de arquitetura, CI/CD, padrões de código e componentes reutilizáveis para acelerar a esteira.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Growth features</h3>
+            <p>Onboarding, trial, funis, paywall, analytics e experimentos para aumentar conversão e retenção.</p>
+          </article>
+          <article class="card reveal">
+            <h3>Escala e confiabilidade</h3>
+            <p>Monitoramento, performance, resiliência e governança para suportar crescimento sem incidentes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="processo">
+      <div class="container">
+        <h2 class="section-title reveal">Nosso processo de construção</h2>
+        <div class="process">
+          <article class="step reveal">
+            <small>Etapa 01</small>
+            <h4>Descoberta e priorização</h4>
+            <p>Mapeamos dor, objetivo e métricas para definir um roadmap enxuto e realista.</p>
+          </article>
+          <article class="step reveal">
+            <small>Etapa 02</small>
+            <h4>Entrega em sprints curtos</h4>
+            <p>Implementação incremental com feedback contínuo do negócio e dos usuários.</p>
+          </article>
+          <article class="step reveal">
+            <small>Etapa 03</small>
+            <h4>Otimização contínua</h4>
+            <p>Medimos impacto, refinamos funis e evoluímos o produto para sustentar escala.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="depoimentos">
+      <div class="container">
+        <h2 class="section-title reveal">Resultados percebidos pelos clientes</h2>
+        <div class="testimonials">
+          <blockquote class="quote reveal">
+            <p>"A Twins Labs nos ajudou a sair de um MVP fraco para uma plataforma SaaS escalável em poucos meses."</p>
+            <footer>CTO, Startup B2B</footer>
+          </blockquote>
+          <blockquote class="quote reveal">
+            <p>"Com o novo produto, dobramos a conversão de trial para pago sem aumentar o time de suporte."</p>
+            <footer>Head de Growth, Scale-up SaaS</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contato">
+      <div class="container">
+        <div class="cta-box reveal">
+          <h3>Vamos construir o próximo SaaS da Twins Labs com foco em crescimento real.</h3>
+          <form class="contact-form" id="contact-form">
+            <div class="contact-form__grid">
+              <label>
+                Nome
+                <input type="text" name="nome" placeholder="Seu nome" required>
+              </label>
+              <label>
+                E-mail
+                <input type="email" name="email" placeholder="voce@empresa.com" required>
+              </label>
+            </div>
+
+            <label>
+              Empresa
+              <input type="text" name="empresa" placeholder="Nome da empresa">
+            </label>
+
+            <label>
+              Mensagem
+              <textarea name="mensagem" placeholder="Conte brevemente seu desafio..." required></textarea>
+            </label>
+
+            <button class="btn btn--ghost" id="contact-submit" type="submit">Enviar mensagem</button>
+            <p class="form-feedback" id="form-feedback" aria-live="polite"></p>
+            <small>As mensagens serão enviadas para elialber@twinslabs.com.br via Supabase + Brevo.</small>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2026 Twins Labs. Todos os direitos reservados.</p>
+      <p>SaaS Engineering • Product Strategy • Growth</p>
+    </div>
+  </footer>
+
+  <script>
+    const mobileToggle = document.getElementById("mobile-toggle");
+    const menu = document.getElementById("main-menu");
+    const menuLinks = menu.querySelectorAll("a");
+
+    mobileToggle.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("menu--open");
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+      mobileToggle.textContent = isOpen ? "✕" : "☰";
+      mobileToggle.setAttribute("aria-label", isOpen ? "Fechar menu" : "Abrir menu");
+    });
+
+    menuLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth <= 760) {
+          menu.classList.remove("menu--open");
+          mobileToggle.setAttribute("aria-expanded", "false");
+          mobileToggle.textContent = "☰";
+          mobileToggle.setAttribute("aria-label", "Abrir menu");
+        }
+      });
+    });
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const links = document.querySelectorAll('a[href^="#"]');
+    links.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const id = link.getAttribute("href");
+        if (!id || id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        event.preventDefault();
+        target.scrollIntoView({
+          behavior: prefersReducedMotion ? "auto" : "smooth",
+          block: "start"
+        });
+      });
+    });
+
+    const revealedElements = document.querySelectorAll(".reveal");
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    revealedElements.forEach((element) => revealObserver.observe(element));
+
+    const statValues = document.querySelectorAll(".stat-value");
+    const formatValue = (value) => {
+      if (value % 1 !== 0) return value.toFixed(1);
+      return String(Math.round(value));
+    };
+
+    const animateStat = (element) => {
+      const target = Number(element.dataset.target || 0);
+      const prefix = element.dataset.prefix || "";
+      const suffix = element.dataset.suffix || "";
+      const duration = 1400;
+      const start = performance.now();
+
+      const step = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = target * eased;
+        element.textContent = `${prefix}${formatValue(current)}${suffix}`;
+        if (progress < 1) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const statsObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          animateStat(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.65 }
+    );
+
+    statValues.forEach((value) => statsObserver.observe(value));
+
+    const contactForm = document.getElementById("contact-form");
+    const contactSubmit = document.getElementById("contact-submit");
+    const formFeedback = document.getElementById("form-feedback");
+
+    const CONTACT_FUNCTION_URL = "https://fyxisscuycxoffsitesv.supabase.co/functions/v1/send-contact";
+    const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_MpSMp_8E-mTmA2j9HjxEnQ_Fv5NXFQU";
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        formFeedback.textContent = "";
+        formFeedback.classList.remove("form-feedback--success", "form-feedback--error");
+
+        const formData = new FormData(contactForm);
+        const payload = {
+          nome: String(formData.get("nome") || "").trim(),
+          email: String(formData.get("email") || "").trim(),
+          empresa: String(formData.get("empresa") || "").trim(),
+          mensagem: String(formData.get("mensagem") || "").trim()
+        };
+
+        if (!payload.nome || !payload.email || !payload.mensagem) {
+          formFeedback.textContent = "Preencha os campos obrigatórios antes de enviar.";
+          formFeedback.classList.add("form-feedback--error");
+          return;
+        }
+
+        const originalText = contactSubmit.textContent;
+        contactSubmit.disabled = true;
+        contactSubmit.textContent = "Enviando...";
+
+        try {
+          const response = await fetch(CONTACT_FUNCTION_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_PUBLISHABLE_KEY,
+              "Authorization": `Bearer ${SUPABASE_PUBLISHABLE_KEY}`
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error("Falha no envio");
+          }
+
+          formFeedback.textContent = "Mensagem enviada com sucesso. Retornaremos em breve.";
+          formFeedback.classList.add("form-feedback--success");
+          contactForm.reset();
+        } catch (error) {
+          formFeedback.textContent = "Não foi possível enviar agora. Tente novamente em instantes.";
+          formFeedback.classList.add("form-feedback--error");
+        } finally {
+          contactSubmit.disabled = false;
+          contactSubmit.textContent = originalText;
+        }
+      });
+    }
+  </script>
+</body>
+</html>
