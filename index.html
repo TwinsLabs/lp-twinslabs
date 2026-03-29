@@ -72,7 +72,7 @@
     }
 
     .nav__inner {
-      min-height: 76px;
+      min-height: 96px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -80,15 +80,19 @@
     }
 
     .brand {
+      display: flex;
+      align-items: center;
       text-decoration: none;
-      color: var(--text);
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: 0.3px;
+      line-height: 0;
+      flex-shrink: 0;
     }
 
-    .brand span {
-      color: var(--primary-2);
+    .brand img {
+      height: 74px;
+      width: auto;
+      max-width: min(437px, 74vw);
+      object-fit: contain;
+      display: block;
     }
 
     .menu {
@@ -604,7 +608,7 @@
       .menu {
         display: none;
         position: absolute;
-        top: 76px;
+        top: 96px;
         left: 1rem;
         right: 1rem;
         background: rgba(10, 14, 32, 0.97);
@@ -685,7 +689,9 @@
 <body>
   <header class="nav">
     <div class="container nav__inner">
-      <a class="brand" href="#top">Twins<span>Labs</span></a>
+      <a class="brand" href="#top" aria-label="Twins Labs — início">
+        <img src="assets/logo-twins.png" alt="twinslabs — ONE STEP FORWARD" width="437" height="101" decoding="async">
+      </a>
       <ul class="menu" id="main-menu">
         <li><a href="#produtos">Produtos</a></li>
         <li><a href="#solucoes">Soluções</a></li>
