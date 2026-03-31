@@ -11,7 +11,7 @@
   <link rel="alternate" hreflang="x-default" href="https://www.twinslabs.com.br/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Epilogue:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #080b1a;
@@ -35,7 +35,7 @@
     }
 
     body {
-      font-family: "Manrope", sans-serif;
+      font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(1200px 600px at 85% -10%, rgba(109, 94, 252, 0.4), transparent 60%),
         radial-gradient(800px 400px at 10% 10%, rgba(255, 127, 102, 0.22), transparent 55%),
@@ -174,8 +174,10 @@
     }
 
     .hero {
+      position: relative;
       padding: 84px 0 44px;
       scroll-margin-top: 104px;
+      overflow: hidden;
     }
 
     .hero__grid {
@@ -185,19 +187,28 @@
       align-items: center;
     }
 
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-family: "Epilogue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-weight: 600;
+    }
+
     .kicker {
       color: #9aa8de;
-      font-weight: 700;
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      font-size: 0.75rem;
-      margin-bottom: 0.8rem;
+      font-size: 0.72rem;
+      margin-bottom: 0.9rem;
     }
 
     h1 {
-      font-size: clamp(2rem, 5vw, 3.9rem);
-      line-height: 1.07;
-      margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 5.1vw, 4.2rem);
+      line-height: 1.02;
+      margin-bottom: 1.4rem;
+      letter-spacing: -0.03em;
     }
 
     .grad {
@@ -212,8 +223,9 @@
 
     .lead {
       color: var(--text-soft);
-      max-width: 58ch;
-      margin-bottom: 2rem;
+      max-width: 62ch;
+      margin-bottom: 2.1rem;
+      font-size: 0.98rem;
     }
 
     .hero__actions {
@@ -252,6 +264,8 @@
       border-radius: 24px;
       padding: 1.2rem;
       box-shadow: var(--shadow);
+      transform-origin: center;
+      will-change: transform;
       animation: floatCard 4.8s ease-in-out infinite;
     }
 
@@ -318,14 +332,16 @@
     }
 
     .section-title {
-      margin-bottom: 0.7rem;
-      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      margin-bottom: 0.5rem;
+      font-size: clamp(1.6rem, 3.1vw, 2.25rem);
+      letter-spacing: -0.03em;
     }
 
     .section-copy {
       color: var(--text-soft);
-      max-width: 70ch;
+      max-width: 66ch;
       margin-bottom: 2rem;
+      font-size: 0.95rem;
     }
 
     .section-copy a {
@@ -360,13 +376,14 @@
     }
 
     .card h3 {
-      margin-bottom: 0.45rem;
-      font-size: 1.1rem;
+      margin-bottom: 0.4rem;
+      font-size: 1.02rem;
+      letter-spacing: -0.01em;
     }
 
     .card p {
       color: var(--text-soft);
-      font-size: 0.96rem;
+      font-size: 0.92rem;
     }
 
     .icon {
@@ -386,6 +403,8 @@
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.03));
       border-top: 1px solid rgba(255, 255, 255, 0.06);
       border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      position: relative;
+      overflow: hidden;
     }
 
     .process {
@@ -585,6 +604,165 @@
       transform: translateY(0);
     }
 
+    .parallax-orbit {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(20px);
+      opacity: 0.9;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      will-change: transform;
+    }
+
+    .parallax-orbit--hero-1 {
+      width: 220px;
+      height: 220px;
+      right: -40px;
+      top: -40px;
+      background: radial-gradient(circle at 30% 30%, rgba(109, 94, 252, 0.65), transparent 60%);
+    }
+
+    .parallax-orbit--hero-2 {
+      width: 260px;
+      height: 260px;
+      left: -60px;
+      bottom: -60px;
+      background: radial-gradient(circle at 70% 70%, rgba(255, 127, 102, 0.55), transparent 60%);
+    }
+
+    .parallax-orbit--band {
+      width: 340px;
+      height: 340px;
+      right: -120px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: radial-gradient(circle at 40% 40%, rgba(93, 131, 255, 0.5), transparent 65%);
+      opacity: 0.7;
+    }
+
+    .parallax-layer {
+      will-change: transform;
+      transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .section-parallax {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: -20%;
+      pointer-events: none;
+      mix-blend-mode: soft-light;
+      opacity: 0.32;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.18) 0, transparent 55%),
+        radial-gradient(circle at 80% 10%, rgba(109, 94, 252, 0.26) 0, transparent 60%),
+        radial-gradient(circle at 0% 90%, rgba(255, 127, 102, 0.22) 0, transparent 55%);
+      animation: heroNoiseDrift 28s ease-in-out infinite alternate;
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: 0.25;
+      mix-blend-mode: screen;
+    }
+
+    .hero-line {
+      position: absolute;
+      width: 200%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      opacity: 0.18;
+      transform-origin: left;
+      animation: heroLineSweep 24s linear infinite;
+    }
+
+    .hero-line--1 {
+      top: 18%;
+      left: -60%;
+      animation-delay: -4s;
+    }
+
+    .hero-line--2 {
+      top: 52%;
+      left: -40%;
+      animation-duration: 22s;
+      animation-delay: -10s;
+    }
+
+    .hero-line--3 {
+      top: 78%;
+      left: -70%;
+      animation-duration: 26s;
+      animation-delay: -16s;
+    }
+
+    .hero-orbit-ring {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      border: 1px dashed rgba(173, 185, 255, 0.16);
+      box-shadow:
+        0 0 26px rgba(109, 94, 252, 0.25),
+        inset 0 0 18px rgba(12, 17, 33, 0.96);
+      top: 8%;
+      right: -60px;
+      pointer-events: none;
+      opacity: 0.32;
+      transform: rotate3d(0, 0, 1, -18deg);
+      animation: heroOrbitPulse 24s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroNoiseDrift {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1.02);
+      }
+      50% {
+        transform: translate3d(18px, -10px, 0) scale(1.06);
+      }
+      100% {
+        transform: translate3d(-14px, 12px, 0) scale(1.04);
+      }
+    }
+
+    @keyframes heroLineSweep {
+      0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.35;
+      }
+      60% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translate3d(60%, 0, 0);
+        opacity: 0;
+      }
+    }
+
+    @keyframes heroOrbitPulse {
+      0% {
+        transform: rotate3d(0, 0, 1, -18deg) scale(0.94);
+        border-color: rgba(173, 185, 255, 0.2);
+      }
+      50% {
+        transform: rotate3d(0, 0, 1, -10deg) scale(1);
+        border-color: rgba(207, 216, 255, 0.52);
+      }
+      100% {
+        transform: rotate3d(0, 0, 1, -3deg) scale(1.03);
+        border-color: rgba(173, 185, 255, 0.28);
+      }
+    }
+
     @keyframes floatCard {
       0%,
       100% {
@@ -742,11 +920,20 @@
   </header>
 
   <main id="top">
-    <section class="hero">
+    <section class="hero section-parallax">
+      <div class="hero-noise"></div>
+      <div class="hero-lines">
+        <div class="hero-line hero-line--1"></div>
+        <div class="hero-line hero-line--2"></div>
+        <div class="hero-line hero-line--3"></div>
+      </div>
+      <div class="hero-orbit-ring parallax-layer" data-depth="-0.12"></div>
+      <div class="parallax-orbit parallax-orbit--hero-1 parallax-layer" data-depth="0.38"></div>
+      <div class="parallax-orbit parallax-orbit--hero-2 parallax-layer" data-depth="-0.32"></div>
       <div class="container hero__grid">
         <div>
           <p class="kicker reveal">Healthtech • Brasil</p>
-          <h1 class="reveal">Plataforma própria para <span class="grad">clínicas médicas</span> — na nuvem, com IA</h1>
+          <h1 class="reveal">A plataforma que organiza, conecta e <span class="grad">faz a clínica funcionar</span></h1>
           <p class="lead reveal">
             A <strong>Twins Labs</strong> é uma empresa brasileira de tecnologia em saúde. Desenvolvemos e operamos o
             <strong>Clicca ClinicOS</strong>: um sistema integrado para clínicas de pequeno e médio porte, com PEP,
@@ -769,7 +956,7 @@
           </div>
         </div>
 
-        <div class="hero-card reveal">
+        <div class="hero-card reveal parallax-layer" data-depth="-0.16">
           <div class="hero-card__inner">
             <div class="mock-top">
               <span class="dot"></span>
@@ -844,7 +1031,7 @@
       </div>
     </section>
 
-    <section class="section solutions" id="mercado">
+    <section class="section solutions section-parallax" id="mercado">
       <div class="container">
         <h2 class="section-title reveal">Mercado e oportunidade</h2>
         <p class="section-copy reveal">
@@ -852,7 +1039,7 @@
           Há espaço para uma plataforma <strong>integrada</strong>, acessível ao segmento PME e alinhada à realidade regulatória e ao comportamento do paciente brasileiro
           (incluindo uso massivo de <strong>WhatsApp</strong>).
         </p>
-        <div class="grid-3">
+        <div class="grid-3 parallax-layer" data-depth="0.18">
           <article class="card reveal">
             <h3>Segmento PME em saúde</h3>
             <p>Clínicas menores precisam de software completo sem complexidade de hospital — e com previsibilidade de custo.</p>
@@ -1008,6 +1195,49 @@
     );
 
     revealedElements.forEach((element) => revealObserver.observe(element));
+
+    // Parallax scroll system — hero + seções (mais agressivo)
+    if (!prefersReducedMotion) {
+      const parallaxLayers = Array.from(document.querySelectorAll(".parallax-layer"));
+
+      const handleParallax = () => {
+        const scrollY = window.scrollY || window.pageYOffset;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+        parallaxLayers.forEach((el) => {
+          const depth = parseFloat(el.getAttribute("data-depth") || "0");
+          if (!depth) return;
+
+          const rect = el.getBoundingClientRect();
+          const elementCenter = rect.top + rect.height / 2;
+          const distanceFromCenter = elementCenter - viewportHeight / 2;
+
+          const translateY = -distanceFromCenter * depth * 0.16;
+          const translateX = depth * 22;
+          const scale = 1 + Math.abs(depth) * 0.08;
+          const rotate = depth * -6;
+
+          if (el.classList.contains("hero-card")) {
+            el.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale}) rotate3d(0, 0, 1, ${rotate}deg)`;
+          } else {
+            el.style.transform = `translate3d(${translateX}px, ${translateY}px, 0) scale(${scale})`;
+          }
+        });
+      };
+
+      let ticking = false;
+      window.addEventListener("scroll", () => {
+        if (!ticking) {
+          window.requestAnimationFrame(() => {
+            handleParallax();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      }, { passive: true });
+
+      handleParallax();
+    }
 
     const contactForm = document.getElementById("contact-form");
     const contactSubmit = document.getElementById("contact-submit");
